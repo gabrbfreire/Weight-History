@@ -1,0 +1,12 @@
+body {
+  background: #333;
+}
+
+.navbar,
+.btn {
+  background: rgb(97, 0, 207) !important;
+}
+
+.btn {
+  border: none;
+}
