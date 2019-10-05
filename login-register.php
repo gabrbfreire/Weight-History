@@ -1,4 +1,5 @@
 <?php
+session_start();
 $servername = "localhost";
 $username = "root";
 $password = "root";
@@ -26,9 +27,14 @@ if($type == 'r'){ //Register
     }
 }else{ //Login  
     if($resultLine['nm_user'] == $name && $resultLine['pw_user'] == $userPassword){
-        $textResult = "Login feito com sucesso";
+        $textResult = "";
+        $_SESSION['user'] = $name;
     }else{
-        $textResult = "Nome ou senha errados";
+        if($resultLine['nm_user'] != $name){
+            $textResult = "Usuário não existe";
+        }else{
+            $textResult = "Senha incorreta";
+        }
     }
 }
 mysqli_close($connect);

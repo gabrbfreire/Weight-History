@@ -2,7 +2,11 @@ function loginRegister(name, password, type) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) { //this = xhttp
-      document.getElementById("result").innerHTML = this.responseText;
+      if (this.responseText == "") {
+        window.location.href = 'main.php';
+      } else {
+        document.getElementById("result").innerHTML = this.responseText;
+      }
     }
   };
   xhttp.open("POST", "login-register.php?n=" + name + "&p=" + password + "&t=" + type, true);
