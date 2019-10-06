@@ -1,3 +1,5 @@
+//AJAX chama uma página que inicia a seção do usuário
+//Se login for sucedido redireciona o usuário para main.php
 function loginRegister(name, password, type) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -5,18 +7,18 @@ function loginRegister(name, password, type) {
       if (this.responseText == "") {
         window.location.href = 'main.php';
       } else {
-        document.getElementById("result").innerHTML = this.responseText;
+        document.getElementById("result").innerHTML = this.responseText; //Mensagem de erro
       }
     }
   };
-  xhttp.open("POST", "login-register.php?n=" + name + "&p=" + password + "&t=" + type, true);
+  xhttp.open("POST", "PHP/login-register.php?n=" + name + "&p=" + password + "&t=" + type, true);
   xhttp.send();
 }
 
-//Login
+//Detecta quando usuário der submit no form de login
 document.getElementById('submitL').addEventListener('submit', function () {
   var name = document.getElementById('nameL').value;
   var password = document.getElementById('passwordL').value;
   loginRegister(name, password, 'l');
-  event.preventDefault(); //Impede submit do form
+  event.preventDefault(); //Impede que o submit do form recarregue a página
 });
