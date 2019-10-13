@@ -29,16 +29,11 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" id="navbarDropdown" data-toggle="dropdown" href="#">
-            <?php echo $_SESSION['usuario'];?>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="#adicionar">Adicionar peso</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Histórico</a>
-            <a class="dropdown-item" href="#">Gráfico</a>
-          </div>
+        <li class="nav-item">
+          <a class="nav-link" href="#" id="anchor-usuario"><?php echo $_SESSION['usuario'];?></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#adicionar" id="anchor-adicionar">Adicionar Peso</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#" id="anchor-sobre">Sobre</a>
@@ -52,26 +47,17 @@
 
   <div class="container">
     <div class="row">
-      <div class="col">
-        <table class="table table-light m-3 table-striped table-bordered table-hover table-sm">
+      <div class="col col1 m-3">
+        <table class="table table-light table-striped table-bordered table-hover table-sm" >
           <thead>
             <tr>
-              <th scope="col">Data</th>
-              <th scope="col">Peso</th>
+              <th class="title" style="width:10%;">Data</th>
+              <th class="title" style="width:10%;">Peso</th>
+              <th class="title" style="width:.5%;">Alterar</th>
+              <th class="title" style="width:.5%;">Excluir</th>
             </tr>
-            <tbody>
-              <tr>
-                <td>Mark</td>
-                <td>Otto</td>
-              </tr>
-              <tr>
-                <td>Jacob</td>
-                <td>Thornton</td>
-              </tr>
-              <tr>
-                <td>Larry</td>
-                <td>the Bird</td>
-              </tr>
+            <tbody id="table">
+
             </tbody>
           </thead>
         </table>
@@ -80,7 +66,7 @@
         <canvas id="myChart" width="400" height="400"></canvas>
       </div>
     </div>
-    <div class="row" id="adicionar">
+    <div class="row mt-5" id="adicionar">
       <div class="col "></div>
       <form id="submitW" class="h-100" method="POST">
         <h3 class="text-light text-center mb-3">Adicionar Peso</h3>
@@ -99,6 +85,7 @@
     </div>
   </div>
 </body>
+<script src="https://kit.fontawesome.com/ff0f4c191d.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 <script src="JS/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

@@ -3,10 +3,16 @@ body {
 }
 
 .navbar,
-.btn {
+.btn,
+.title {
   background: rgb(97, 0, 207) !important;
 }
 
 .btn {
+  border: none;
+}
+
+button {
+  background: transparent;
   border: none;
 }

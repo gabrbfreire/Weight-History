@@ -8,7 +8,7 @@ window.addEventListener('load', function () {
 });
 
 
-//Cria o grafico, utilizando a biblioteca Chartjs, com os dados obtidos do banco
+//Cria o grafico, utilizando a biblioteca Chart.js, com os dados obtidos do banco
 function plotaGrafico() {
   console.log(datas, pesos);
   var ctx = document.getElementById('myChart');
@@ -68,6 +68,7 @@ function criaArraysDatasPesos() {
         pesos.push(eval(peso));
       }
       plotaGrafico();
+      criaTabela(dados);
     }
   }
   xhttp.open("POST", "PHP/plota.php", true);
@@ -94,3 +95,34 @@ document.getElementById('submitW').addEventListener('submit', function () {
   registraPeso(peso);
   event.preventDefault(); //Impede submit do form
 });
+
+var x = document.createElement('asd');
+
+function criaTabela(dados) {
+  for (var len in dados) {
+    var data = 'dados.' + len + '.data';
+    var massa = 'dados.' + len + '.massa';
+
+    var row = table.insertRow();
+
+    var cell1 = row.insertCell(0);
+    var x = document.createElement('asd');
+    x.innerHTML = eval(data);
+    cell1.appendChild(x);
+
+    var cell2 = row.insertCell(1);
+    var x = document.createElement('asd');
+    x.innerHTML = eval(massa);
+    cell2.appendChild(x);
+
+    var cell3 = row.insertCell(2);
+    var x = document.createElement('button');
+    x.innerHTML = '<i class="far fa-edit"></i>';
+    cell3.appendChild(x);
+
+    var cell4 = row.insertCell(3);
+    var x = document.createElement('button');
+    x.innerHTML = '<i class="fas fa-times"></i>';
+    cell4.appendChild(x);
+  }
+}
