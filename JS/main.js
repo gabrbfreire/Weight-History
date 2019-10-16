@@ -9,7 +9,7 @@ window.addEventListener('load', function () {
 
 
 //Cria o grafico, utilizando a biblioteca Chart.js, com os dados obtidos do banco
-function plotaGrafico() {
+function grafico() {
   console.log(datas, pesos);
   var ctx = document.getElementById('myChart');
   var myChart = new Chart(ctx, {
@@ -67,7 +67,7 @@ function criaArraysDatasPesos() {
         datas.push(eval(data));
         pesos.push(eval(peso));
       }
-      plotaGrafico();
+      grafico();
       criaTabela(dados);
     }
   }
@@ -83,6 +83,7 @@ function registraPeso(peso) {
     if (this.readyState == 4 && this.status == 200) { //this = xhttp
       document.getElementById("result").innerHTML = this.responseText;
       criaArraysDatasPesos();
+      location.reload();
     }
   };
   xhttp.open("POST", "PHP/registra-peso.php?p=" + peso, true);
@@ -100,6 +101,7 @@ var x = document.createElement('asd');
 
 function criaTabela(dados) {
   for (var len in dados) {
+    var codigo = 'dados.' + len + '.codigo';
     var data = 'dados.' + len + '.data';
     var massa = 'dados.' + len + '.massa';
 
@@ -117,12 +119,49 @@ function criaTabela(dados) {
 
     var cell3 = row.insertCell(2);
     var x = document.createElement('button');
-    x.innerHTML = '<i class="far fa-edit"></i>';
+    x.innerHTML = '<i class="far fa-edit" id="a' + eval(codigo) + '"></i>';
     cell3.appendChild(x);
+
+    document.getElementById('a' + eval(codigo) + '').addEventListener('click', clickAlterar);
 
     var cell4 = row.insertCell(3);
     var x = document.createElement('button');
-    x.innerHTML = '<i class="fas fa-times"></i>';
+    x.innerHTML = '<i class="fas fa-times" id="d' + eval(codigo) + '"></i>';
     cell4.appendChild(x);
+
+    document.getElementById('d' + eval(codigo) + '').addEventListener('click', clickExcluir);
   }
+}
+
+function clickAlterar() {
+  var novoPeso = prompt('Novo peso:', '');
+  console.log(novoPeso);
+
+  var id = this.id.slice(1);
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) { //this = xhttp
+      if (this.responseText == "") {
+        location.reload();
+      }
+    }
+  };
+  xhttp.open("POST", "PHP/alterar.php?id=" + id + "&peso=" + novoPeso, true);
+  xhttp.send();
+}
+
+function clickExcluir() {
+  var id = this.id.slice(1);
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) { //this = xhttp
+      if (this.responseText == "") {
+        location.reload();
+      }
+    }
+  };
+  xhttp.open("POST", "PHP/deletar.php?id=" + id, true);
+  xhttp.send();
 }

@@ -30,7 +30,7 @@ echo '{';
             $linha = mysqli_fetch_assoc($resultado);
             $data = date("d-m-Y", strtotime($linha['dt_massa']));
             $num = $i + 1;
-            echo '"massas'.$num.'":{"massa":"'.$linha['vl_massa'].'", "data":"'.$data.'"}';
+            echo '"massas'.$num.'":{"codigo":"'.$linha['cd_massa'].'", "massa":"'.$linha['vl_massa'].'", "data":"'.$data.'"}';
             if($i != $colunas-1){
                 echo ',';
             }
