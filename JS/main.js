@@ -2,31 +2,34 @@
 var datas = [];
 var pesos = [];
 
+
 //Gera o gráfico quando a página for carregada
 window.addEventListener('load', function () {
-  criaArraysDatasPesos();
+  carregaDados();
 });
 
 
-//Cria o grafico, utilizando a biblioteca Chart.js, com os dados obtidos do banco
-function grafico() {
+//Cria o criaGrafico, utilizando a biblioteca Chart.js, com os dados obtidos do banco
+function criaGrafico() {
   console.log(datas, pesos);
   var ctx = document.getElementById('myChart');
   var myChart = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: datas,
+      labels: datas, ////
       datasets: [{
         fill: false,
         backgroundColor: 'Orange',
         borderColor: 'Orange',
         label: 'Peso',
-        data: pesos,
+        data: pesos, ////
         borderWidth: 4,
         lineTension: .01
       }]
     },
     options: {
+      responsive: true,
+      maintainAspectRatio: false,
       scales: {
         yAxes: [{
           ticks: {
@@ -38,7 +41,8 @@ function grafico() {
   });
 }
 
-//Quando o usuário clicar em sair AJAX chama uma pagina que limpa a superglobal SESSION terminando a seção do usuário
+
+//Quando o usuário clicar em sair AJAX chama uma pagina PHP que limpa a superglobal SESSION terminando a seção do usuário
 document.getElementById('anchor-sair').addEventListener('click', function () {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -52,8 +56,9 @@ document.getElementById('anchor-sair').addEventListener('click', function () {
   xhttp.send();
 });
 
-//AJAX obtem os dados do banco e preenche dois arrays que serão usados na geração do gráfico
-function criaArraysDatasPesos() {
+
+//Obtem os dados do banco e preenche dois arrays que serão usados na geração do gráfico
+function carregaDados() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) { //this = xhttp
@@ -67,7 +72,7 @@ function criaArraysDatasPesos() {
         datas.push(eval(data));
         pesos.push(eval(peso));
       }
-      grafico();
+      criaGrafico();
       criaTabela(dados);
     }
   }
@@ -75,20 +80,24 @@ function criaArraysDatasPesos() {
   xhttp.send();
 }
 
+
 //Novo peso inserido pelo usuário é enviado atráves do AJAX para uma pagina onde é feito seu INSERT
-//Cria nova tabela com dados inseridos
+
 function registraPeso(peso) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) { //this = xhttp
       document.getElementById("result").innerHTML = this.responseText;
-      criaArraysDatasPesos();
+
+      //Cria uma nova tabela e gráfico com dados inseridos
+      carregaDados();
       location.reload();
     }
   };
   xhttp.open("POST", "PHP/registra-peso.php?p=" + peso, true);
   xhttp.send();
 }
+
 
 //Detecta se usuário deu submit no form de adicionar peso
 document.getElementById('submitW').addEventListener('submit', function () {
@@ -97,7 +106,9 @@ document.getElementById('submitW').addEventListener('submit', function () {
   event.preventDefault(); //Impede submit do form
 });
 
+
 var x = document.createElement('asd');
+
 
 function criaTabela(dados) {
   for (var len in dados) {
@@ -133,9 +144,9 @@ function criaTabela(dados) {
   }
 }
 
+//Altera dado
 function clickAlterar() {
   var novoPeso = prompt('Novo peso:', '');
-  console.log(novoPeso);
 
   var id = this.id.slice(1);
 
@@ -147,10 +158,14 @@ function clickAlterar() {
       }
     }
   };
+
+  //Passa id e novo peso para PHP
   xhttp.open("POST", "PHP/alterar.php?id=" + id + "&peso=" + novoPeso, true);
   xhttp.send();
 }
 
+
+//Remove dado
 function clickExcluir() {
   var id = this.id.slice(1);
 
@@ -162,6 +177,8 @@ function clickExcluir() {
       }
     }
   };
+
+  //Passa id para PHP
   xhttp.open("POST", "PHP/deletar.php?id=" + id, true);
   xhttp.send();
 }

@@ -1,6 +1,6 @@
 //AJAX chama uma página que registra o usuário
 //Se sign in for sucedido redireciona o usuário para main.php
-function loginRegister(name, password, type) {
+function registrar(name, password, type) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) { //this = xhttp
@@ -19,6 +19,6 @@ function loginRegister(name, password, type) {
 document.getElementById('submitR').addEventListener('submit', function () {
   var name = document.getElementById('nameR').value;
   var password = document.getElementById('passwordR').value;
-  loginRegister(name, password, 'r');
+  registrar(name, password, 'r');
   event.preventDefault(); //Impede submit do form
 });

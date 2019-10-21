@@ -33,12 +33,6 @@
           <a class="nav-link" href="#" id="anchor-usuario"><?php echo $_SESSION['usuario'];?></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#adicionar" id="anchor-adicionar">Adicionar Peso</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#" id="anchor-sobre">Sobre</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="index.html" id="anchor-sair">Sair</a>
         </li>
       </ul>
@@ -47,28 +41,33 @@
 
   <div class="container">
     <div class="row">
-      <div class="col col1 m-3">
-        <table class="table table-light table-striped table-bordered table-hover table-sm" >
-          <thead>
-            <tr>
-              <th class="title" style="width:10%;">Data</th>
-              <th class="title" style="width:10%;">Peso</th>
-              <th class="title" style="width:.5%;">Alterar</th>
-              <th class="title" style="width:.5%;">Excluir</th>
-            </tr>
-            <tbody id="table">
+        <div class="col mt-3">
+          <div class="card tabela">
+            <table class="table table-light table-striped table-bordered table-hover table-sm">
+              <thead>
+                <tr>
+                  <th class="title" style="width:10%;">Data</th>
+                  <th class="title" style="width:10%;">Peso</th>
+                  <th class="title" style="width:.5%;">Alterar</th>
+                  <th class="title" style="width:.5%;">Excluir</th>
+                </tr>
+                <tbody id="table">
 
-            </tbody>
-          </thead>
-        </table>
+                </tbody>
+              </thead>
+            </table>
+          </div>
       </div>
-      <div class="col">
-        <canvas id="myChart" width="400" height="400"></canvas>
+      <div class="col mt-3">
+        <div class="card">
+          <canvas id="myChart"></canvas>
+        </div>
       </div>
     </div>
     <div class="row mt-5" id="adicionar">
-      <div class="col "></div>
-      <form id="submitW" class="h-100" method="POST">
+      <div class="col"></div>
+      
+      <form id="submitW" method="POST">
         <h3 class="text-light text-center mb-3">Adicionar Peso</h3>
         <div class="form-group">
           <input class="border rounded p-2 w-100" id="peso" type="number" min="30" name="peso" placeholder="Peso"
@@ -81,6 +80,7 @@
         </div>
         <h5 id="result" class="text-light"></h5>
       </form>
+
       <div class="col"></div>
     </div>
   </div>
