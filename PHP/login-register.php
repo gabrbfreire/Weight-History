@@ -6,8 +6,8 @@ $username = "root";
 $password = "root";
 $dbname = "historico_massa";
 
-$email = $_REQUEST["n"];
-$senhaUsuario = $_REQUEST["p"];
+$email = filter_var($_REQUEST["n"], FILTER_SANITIZE_EMAIL);
+$senhaUsuario = filter_var($_REQUEST["p"], FILTER_SANITIZE_STRING);
 $tipo = $_REQUEST["t"];
 
 $conexao = mysqli_connect($servername, $username, $password, $dbname)or die("Erro");

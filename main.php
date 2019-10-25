@@ -1,7 +1,7 @@
 <?php
   session_start();
   if (!isset($_SESSION['usuario'])) {
-    header('yourFile.php');
+    header('Location: index.html');
     exit();
   }
 ?>
@@ -23,11 +23,6 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <a class="navbar-brand" href="index.html">Weight History</a>
 
-    <button class="navbar-toggler" type="buttom" data-toggle="collapse data-target=" #navbarSupportedContent">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" href="#" id="anchor-usuario"><?php echo $_SESSION['usuario'];?></a>
@@ -36,7 +31,6 @@
           <a class="nav-link" href="index.html" id="anchor-sair">Sair</a>
         </li>
       </ul>
-    </div>
   </nav>
 
   <div class="container">

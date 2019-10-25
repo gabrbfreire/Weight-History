@@ -6,6 +6,7 @@ var pesos = [];
 //Gera o gráfico quando a página for carregada
 window.addEventListener('load', function () {
   carregaDados();
+  document.getElementById("peso").focus();
 });
 
 
@@ -90,7 +91,6 @@ function registraPeso(peso) {
       document.getElementById("result").innerHTML = this.responseText;
 
       //Cria uma nova tabela e gráfico com dados inseridos
-      carregaDados();
       location.reload();
     }
   };
@@ -150,18 +150,20 @@ function clickAlterar() {
 
   var id = this.id.slice(1);
 
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) { //this = xhttp
-      if (this.responseText == "") {
-        location.reload();
+  if (novoPeso >= 30) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) { //this = xhttp
+        if (this.responseText == "") {
+          location.reload();
+        }
       }
-    }
-  };
+    };
 
-  //Passa id e novo peso para PHP
-  xhttp.open("POST", "PHP/alterar.php?id=" + id + "&peso=" + novoPeso, true);
-  xhttp.send();
+    //Passa id e novo peso para PHP
+    xhttp.open("POST", "PHP/alterar.php?id=" + id + "&peso=" + novoPeso, true);
+    xhttp.send();
+  }
 }
 
 
