@@ -2,6 +2,8 @@
 var datas = [];
 var pesos = [];
 
+var id = 0;
+
 
 //Gera o gráfico quando a página for carregada
 window.addEventListener('load', function () {
@@ -12,7 +14,7 @@ window.addEventListener('load', function () {
 
 //Cria o criaGrafico, utilizando a biblioteca Chart.js, com os dados obtidos do banco
 function criaGrafico() {
-  console.log(datas, pesos);
+
   var ctx = document.getElementById('myChart');
   var myChart = new Chart(ctx, {
     type: 'line',
@@ -130,10 +132,10 @@ function criaTabela(dados) {
 
     var cell3 = row.insertCell(2);
     var x = document.createElement('button');
-    x.innerHTML = '<i class="far fa-edit" id="a' + eval(codigo) + '"></i>';
+    x.innerHTML = '<i class="far fa-edit" data-toggle="modal" data-target="#exampleModal" id="a' + eval(codigo) + '"></i>';
     cell3.appendChild(x);
 
-    document.getElementById('a' + eval(codigo) + '').addEventListener('click', clickAlterar);
+    document.getElementById('a' + eval(codigo) + '').addEventListener('click', obtemIdAlterar);
 
     var cell4 = row.insertCell(3);
     var x = document.createElement('button');
@@ -144,12 +146,19 @@ function criaTabela(dados) {
   }
 }
 
+function obtemIdAlterar() {
+  id = this.id.slice(1);
+  document.getElementById('input-peso-alterar').focus();
+  console.log(id);
+}
+
+document.getElementById('btn-alterar').addEventListener('click', clickAlterar);
+
 //Altera dado
 function clickAlterar() {
-  var novoPeso = prompt('Novo peso:', '');
 
-  var id = this.id.slice(1);
-
+  var novoPeso = document.getElementById('input-peso-alterar').value;
+  console.log(id, novoPeso);
   if (novoPeso >= 30) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
