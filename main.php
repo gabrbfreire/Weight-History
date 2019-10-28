@@ -21,7 +21,7 @@
 
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="index.html">Weight History</a>
+    <i class="fas fa-chart-line"></i>
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">

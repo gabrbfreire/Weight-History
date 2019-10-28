@@ -146,6 +146,7 @@ function criaTabela(dados) {
   }
 }
 
+
 function obtemIdAlterar() {
   id = this.id.slice(1);
   document.getElementById('input-peso-alterar').focus();

@@ -16,3 +16,8 @@ button {
   background: transparent;
   border: none;
 }
+
+.fa-chart-line {
+  font-size: 40px;
+  color: white;
+}
