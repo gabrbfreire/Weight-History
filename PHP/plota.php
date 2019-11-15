@@ -2,10 +2,10 @@
 session_start();
 include 'conexao.php';
 
-//Obtem codigo do usuário
+//Obtém código do usuário
 $usuarioId = $_SESSION['usuarioId'];
 
-//Obtem registros do usuário
+//Obtém registros do usuário
 $sql = "CALL SelecionaDadosUsuario('$usuarioId')";
 $resultado = mysqli_query($conexao, $sql)or die("Erro");
 

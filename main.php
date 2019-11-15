@@ -1,6 +1,6 @@
 <?php
   session_start();
-  if (!isset($_SESSION['usuario'])) {
+  if (!isset($_SESSION['usuarioEmail'])) {
     header('Location: index.html');
     exit();
   }
@@ -25,7 +25,7 @@
 
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#" id="anchor-usuario"><?php echo $_SESSION['usuario'];?></a>
+          <a class="nav-link" href="#" id="anchor-usuarioEmail"><?php echo $_SESSION['usuarioEmail'];?></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="index.html" id="anchor-sair">Sair</a>

@@ -45,6 +45,9 @@ function criaGrafico() {
   });
 }
 
+
+
+
 //Quando o usuário clicar em sair AJAX chama uma pagina PHP que limpa a superglobal SESSION terminando a seção do usuário
 document.getElementById("anchor-sair").addEventListener("click", function () {
   var xhttp = new XMLHttpRequest();
@@ -60,6 +63,9 @@ document.getElementById("anchor-sair").addEventListener("click", function () {
   xhttp.send();
 });
 
+
+
+
 //Obtem os dados do banco e preenche dois arrays que serão usados na geração do gráfico
 function carregaDados() {
   var xhttp = new XMLHttpRequest();
@@ -68,7 +74,6 @@ function carregaDados() {
       //this = xhttp
 
       var dados = JSON.parse(this.responseText);
-      console.log(dados);
       for (var len in dados) {
         var peso = "dados." + len + ".massa";
         var data = "dados." + len + ".data";
@@ -84,8 +89,10 @@ function carregaDados() {
   xhttp.send();
 }
 
-//Novo peso inserido pelo usuário é enviado atráves do AJAX para uma pagina onde é feito seu INSERT
 
+
+
+//Novo peso inserido pelo usuário é enviado atráves do AJAX para uma pagina onde é feito seu INSERT
 function registraPeso(peso) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -108,7 +115,8 @@ document.getElementById("submitW").addEventListener("submit", function () {
   event.preventDefault(); //Impede submit do form
 });
 
-var x = document.createElement("asd");
+
+
 
 function criaTabela(dados) {
   for (var len in dados) {
@@ -119,31 +127,36 @@ function criaTabela(dados) {
     var row = table.insertRow();
 
     var cell1 = row.insertCell(0);
-    var x = document.createElement("asd");
-    x.innerHTML = eval(data);
-    cell1.appendChild(x);
+    var elemento = document.createElement("asd");
+    elemento.innerHTML = eval(data);
+    cell1.appendChild(elemento);
 
     var cell2 = row.insertCell(1);
-    var x = document.createElement("asd");
-    x.innerHTML = eval(massa);
-    cell2.appendChild(x);
+    var elemento = document.createElement("asd");
+    elemento.innerHTML = eval(massa);
+    cell2.appendChild(elemento);
 
+
+    //Icone alterar
     var cell3 = row.insertCell(2);
-    var x = document.createElement("button");
-    x.innerHTML =
+    var elemento = document.createElement("button");
+    //Adiciona id do dado ao botão
+    elemento.innerHTML =
       '<i class="far fa-edit" data-toggle="modal" data-target="#exampleModal" id="a' +
       eval(codigo) +
       '"></i>';
-    cell3.appendChild(x);
+    cell3.appendChild(elemento);
 
     document
       .getElementById("a" + eval(codigo) + "")
       .addEventListener("click", obtemIdAlterar);
 
+    //Icone excluir  
     var cell4 = row.insertCell(3);
-    var x = document.createElement("button");
-    x.innerHTML = '<i class="fas fa-times" id="d' + eval(codigo) + '"></i>';
-    cell4.appendChild(x);
+    var elemento = document.createElement("button");
+    //Adiciona id do dado ao botão
+    elemento.innerHTML = '<i class="fas fa-times" id="d' + eval(codigo) + '"></i>';
+    cell4.appendChild(elemento);
 
     document
       .getElementById("d" + eval(codigo) + "")
@@ -151,10 +164,13 @@ function criaTabela(dados) {
   }
 }
 
+
+
+
+//Pega id do botão para alterar peso
 function obtemIdAlterar() {
   id = this.id.slice(1);
   document.getElementById("input-peso-alterar").focus();
-  console.log(id);
 }
 
 document.getElementById("btn-alterar").addEventListener("click", clickAlterar);
@@ -162,7 +178,6 @@ document.getElementById("btn-alterar").addEventListener("click", clickAlterar);
 //Altera dado
 function clickAlterar() {
   var novoPeso = document.getElementById("input-peso-alterar").value;
-  console.log(id, novoPeso);
   if (novoPeso >= 30) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -180,8 +195,12 @@ function clickAlterar() {
   }
 }
 
+
+
+
 //Remove dado
 function clickExcluir() {
+  //Pega id do icone para excluir peso
   var id = this.id.slice(1);
 
   var xhttp = new XMLHttpRequest();
