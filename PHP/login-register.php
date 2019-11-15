@@ -40,7 +40,8 @@ if($tipo == 'r'){
     //Login  
     if($resultadoLinha['em_usuario'] == $email && password_verify($senhaUsuario, $resultadoLinha['pw_usuario']) == 1){
         $textoResultado = "";
-        $_SESSION['usuario'] = $email;
+        $_SESSION['usuarioEmail'] = $email;
+        $_SESSION['usuarioId'] = $resultadoLinha['cd_usuario'];
     }else{
         $textoResultado = "Usuário ou Senha inválidos";
     }

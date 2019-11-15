@@ -1,23 +1,12 @@
 <?php
 session_start();
-$servername = "localhost";
-$username = "root";
-$password = "root";
-$dbname = "historico_massa";
-
-$usuario = $_SESSION['usuario'];
+include 'conexao.php';
 
 //Obtem codigo do usuário
-$conexao = mysqli_connect($servername, $username, $password, $dbname)or die("Erro");
-$sql = "CALL SelecionaCdUsuario('$usuario')";
-$resultado = mysqli_query($conexao, $sql)or die("Erro");
-$linha = mysqli_fetch_assoc($resultado);
-$cdUsuario = $linha['cd_usuario'];
-mysqli_close($conexao);
+$usuarioId = $_SESSION['usuarioId'];
 
 //Obtem registros do usuário
-$conexao = mysqli_connect($servername, $username, $password, $dbname)or die("Erro");
-$sql = "CALL SelecionaDadosUsuario('$cdUsuario')";
+$sql = "CALL SelecionaDadosUsuario('$usuarioId')";
 $resultado = mysqli_query($conexao, $sql)or die("Erro");
 
 $i = 0;
